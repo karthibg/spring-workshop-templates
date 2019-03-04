@@ -1,5 +1,6 @@
 package ch.asmiq.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,59 +25,19 @@ public class AsmiqAcademyService {
 	private CertificationService certificationService;
 
 	public List<Course> getCourses() {
-		return courseService.getCourses();
+		//TODO
+		//return courseService.getCourses();
+		return Collections.emptyList();
 	}
 
 	public void placeOrder(Order order) {
-		notificationService.sendNotification(order);
+		//TODO
+		//notificationService.sendNotification(order);
 	}
 
-	public CourseService getCourseService() {
-		return courseService;
-	}
-
-	public void setCourseService(CourseService courseService) {
-		this.courseService = courseService;
-	}
-
-	public NotificationService getNotificationService() {
-		return notificationService;
-	}
-
-	public void setNotificationService(NotificationService notificationService) {
-		this.notificationService = notificationService;
-	}
-
-	public PaymentService getPaymentService() {
-		return paymentService;
-	}
-
-	public void setPaymentService(PaymentService paymentService) {
-		this.paymentService = paymentService;
-	}
-
-	public FeedbackService getFeedBackService() {
-		return feedBackService;
-	}
-
-	public void setFeedBackService(FeedbackService feedBackService) {
-		this.feedBackService = feedBackService;
-	}
-
-	public ExamService getExamService() {
-		return examService;
-	}
-
-	public void setExamService(ExamService examService) {
-		this.examService = examService;
-	}
-
-	public CertificationService getCertificationService() {
-		return certificationService;
-	}
-
-	public void setCertificationService(CertificationService certificationService) {
-		this.certificationService = certificationService;
+	public void downloadCertificate(Order order) {
+		//TODO
+		//certificationService.downloadCertificate(order);
 	}
 
 }

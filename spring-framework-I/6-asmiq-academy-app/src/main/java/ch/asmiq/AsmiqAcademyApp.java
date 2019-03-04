@@ -1,6 +1,8 @@
 package ch.asmiq;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.logging.Logger;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,42 +17,46 @@ import ch.asmiq.service.AsmiqAcademyService;
 public class AsmiqAcademyApp {
 
 	private static final Logger LOG = Logger.getLogger(AsmiqAcademyApp.class.getName());
+	
+	private static final List<BiConsumer<AsmiqAcademyService, Order>> orderExecutions = List.of(AsmiqAcademyService::placeOrder, AsmiqAcademyService::downloadCertificate);
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+		final AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
 				AsmiqAcademyApp.class);
-		AsmiqAcademyService asmiqAcademyService = applicationContext.getBean(AsmiqAcademyService.class);
+		final AsmiqAcademyService asmiqAcademyService = applicationContext.getBean(AsmiqAcademyService.class);
 
-		var optJavaCourse = findFirstCourseByTopic(asmiqAcademyService, "Java");
+		final var optJavaCourse = findFirstCourseByTopic(asmiqAcademyService, "Java");
 
-		var karthi = new Customer("karthi", "karthistr 6, 8051 Zürich");
-		var michael = new Customer("michael", "karthistr 6, 8051 Zürich");
+		final var karthi = new Customer("karthi", "karthistr 6, 8051 Zürich");
+		final var michael = new Customer("michael", "michaelstr 19, 8053 Zürich");
 
-		placeOrder(asmiqAcademyService, optJavaCourse, karthi);
-		placeOrder(asmiqAcademyService, optJavaCourse, michael);
+		executeOrderFor(karthi, optJavaCourse, asmiqAcademyService);
+		executeOrderFor(michael, optJavaCourse, asmiqAcademyService);
 
 		applicationContext.close();
 
 	}
 
-	private static void placeOrder(AsmiqAcademyService academyService, Optional<Course> optCourse, Customer customer) {
+	private static void executeOrderFor(final Customer customer, final Optional<Course> optCourse,
+			final AsmiqAcademyService academyService) {
 
 		optCourse.ifPresentOrElse(courseName -> {
-			Order order = createOrder(courseName, customer);
-			academyService.placeOrder(order);
+			final Order order = createOrder(courseName, customer);
+			orderExecutions.forEach(oe -> oe.accept(academyService, order));
 		}, AsmiqAcademyApp::handleCourseNotPresent);
 
 	}
 
-	private static Order createOrder(Course courseName, Customer customer) {
-		Order order = new Order();
+	private static Order createOrder(final Course courseName, final Customer customer) {
+		final var order = new Order();
 		order.setCustomer(customer);
 		order.setCourse(courseName);
 		return order;
 	}
 
-	private static Optional<Course> findFirstCourseByTopic(AsmiqAcademyService academyService, String topic) {
+	private static Optional<Course> findFirstCourseByTopic(final AsmiqAcademyService academyService,
+			final String topic) {
 		return academyService.getCourses().stream().filter(p -> p.getName().contains(topic)).findAny();
 	}
 
