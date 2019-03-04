@@ -12,3 +12,19 @@ This workshop provides better understanding of the basics of the spring-framewor
 # PARTICIPANTS
 Software-Developer and -Architects, who want to gain better understanding of the most popular spring framework. 
 
+# Contact
+
+- Michael Inden 
+
+CTO & Teamleiter SW-Entwicklung & Leiter ASMIQ Academy
+ASMIQ AG, Thurgauer Str. 39, 8050 Zürich
+E-Mail: michael.inden@asmiq.ch
+Kursangebot: https://asmiq.ch/
+
+- Bollu Ganesh Karthikeyan
+
+Lead Engineer / Trainer
+ASMIQ AG, Thurgauer Str. 39, 8050 Zürich
+E-Mail: karthikeyan.bolluganesh@asmiq.ch
+Kursangebot: https://asmiq.ch/
+
