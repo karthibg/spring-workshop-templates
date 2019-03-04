@@ -12,7 +12,7 @@ import ch.asmiq.model.Order;
 @Service
 public class SixPaymentService implements PaymentService {
 
-private static final Logger LOG = Logger.getLogger(SixPaymentService.class.getName());
+	private static final Logger LOG = Logger.getLogger(SixPaymentService.class.getName());
 	
 	private BigDecimal discountPercent = new BigDecimal("0.25");
 	
@@ -23,6 +23,7 @@ private static final Logger LOG = Logger.getLogger(SixPaymentService.class.getNa
 		BigDecimal totalPrice = coursePrice.subtract(discountPrice);
 		LOG.info("Total amount paid :" + NumberFormat.getInstance().format(totalPrice));
 	}
+
 
 	
 
