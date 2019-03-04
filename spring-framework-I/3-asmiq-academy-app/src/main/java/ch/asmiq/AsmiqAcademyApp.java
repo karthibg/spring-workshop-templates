@@ -22,7 +22,7 @@ public class AsmiqAcademyApp {
 		var optJavaCourse = findFirstCourseByTopic(asmiqAcademyService, "Java");
 
 		var karthi = new Customer("karthi", "karthistr 6, 8051 Zürich");
-		var michael = new Customer("michael", "karthistr 6, 8051 Zürich");
+		var michael = new Customer("michael", "michaelstr 19, 8050 Zürich");
 
 		placeOrder(asmiqAcademyService, optJavaCourse, karthi);
 		placeOrder(asmiqAcademyService, optJavaCourse, michael);
